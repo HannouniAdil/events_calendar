@@ -7,6 +7,14 @@ const Header = () => {
   const toggleDrawer = (value) => {
     setDrawerOpen(value)
   }
+
+  const handleScroll = () =>{
+    console.log(window.scrollY)
+  }
+  useEffect(()=>{
+    window.addEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <AppBar 
       position="fixed"
@@ -22,7 +30,7 @@ const Header = () => {
           <div className="header_logo_title">Musical Events</div>
         </div>
         <IconButton
-          aria-laberl="Menu"
+          aria-label="Menu"
           color="inherit"
           onClick={()=> toggleDrawer(true)}
           >
