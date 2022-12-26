@@ -1,27 +1,32 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { AppBar, Toolbar, IconButton } from "@material-ui/core";
-import MenuIcon from '@material-ui/icons/Menu';
-import SideDrawer from './SideDrawer';
+import MenuIcon from "@material-ui/icons/Menu";
+import SideDrawer from "./SideDrawer";
 const Header = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false)
-  const toggleDrawer = (value) => {
-    setDrawerOpen(value)
-  }
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [headerShow,setHeaderShow] =  useState(false);
+  const toggleDrawer = value => {
+    setDrawerOpen(value);
+  };
 
-  const handleScroll = () =>{
-    console.log(window.scrollY)
-  }
-  useEffect(()=>{
-    window.addEventListener('scroll', handleScroll)
-  }, [])
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setHeaderShow(true);
+    } else {
+      setHeaderShow(false);
+    }
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <AppBar 
+    <AppBar
       position="fixed"
       style={{
-        backgroundColor: '#2f2f2f',
-        boxShadow: 'none',
-        padding: '10px 0px'
+        backgroundColor: "#2f2f2f",
+        boxShadow: "none",
+        padding: "10px 0px"
       }}
     >
       <Toolbar>
@@ -32,14 +37,11 @@ const Header = () => {
         <IconButton
           aria-label="Menu"
           color="inherit"
-          onClick={()=> toggleDrawer(true)}
-          >
-            <MenuIcon/>
-          </IconButton>
-      <SideDrawer
-        open={drawerOpen}
-        onClose={(value)=> toggleDrawer(value)}
-      />
+          onClick={() => toggleDrawer(true)}
+        >
+          <MenuIcon />
+        </IconButton>
+        <SideDrawer open={drawerOpen} onClose={value => toggleDrawer(value)} />
       </Toolbar>
     </AppBar>
   );
